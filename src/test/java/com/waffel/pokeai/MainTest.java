@@ -3,14 +3,12 @@ package com.waffel.pokeai;
 import com.waffel.pokeai.exceptions.PokeAiException;
 import com.waffel.pokeai.execution.Execution;
 import com.waffel.pokeai.execution.TestExecution;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
@@ -19,7 +17,7 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 public class MainTest {
     @Test
     public void testMainExecuteCalled() throws Exception {
-        final String[] mockArgs = new String[] {"mockArgs"};
+        final String[] mockArgs = new String[]{"mockArgs"};
         final Main mainMock = mock(Main.class);
         final Execution executionMock = mock(Execution.class);
 
@@ -32,7 +30,7 @@ public class MainTest {
 
     @Test
     public void testMainExecuteFailedExceptionCaught() throws Exception {
-        final String[] mockArgs = new String[] {"mockArgs"};
+        final String[] mockArgs = new String[]{"mockArgs"};
         final Main mainMock = mock(Main.class);
         final Execution executionMock = mock(Execution.class);
 

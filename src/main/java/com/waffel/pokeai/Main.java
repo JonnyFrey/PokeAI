@@ -5,6 +5,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.waffel.pokeai.configuration.Configuration;
 import com.waffel.pokeai.exceptions.PokeAiException;
+import com.waffel.pokeai.exceptions.PokeAiRuntimeException;
 import com.waffel.pokeai.execution.Command;
 import com.waffel.pokeai.execution.Execution;
 import lombok.Getter;
@@ -39,9 +40,17 @@ public final class Main {
 
         jCommander.parse(args);
 
-
         final String commandName = jCommander.getParsedCommand();
         final Command command = Command.byName(commandName);
+
+        if (mainParameters.isHelp()) {
+            if (Command.DEFAULT.equals(command)) {
+                jCommander.usage();
+            } else {
+                jCommander.usage(commandName);
+            }
+            throw new PokeAiRuntimeException("exiting...");
+        }
 
         final Configuration<?> configuration = command.getConfiguration();
         final Injector injector = Guice.createInjector(configuration.getRequiredModules());
