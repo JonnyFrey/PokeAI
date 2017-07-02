@@ -1,0 +1,106 @@
+import net.saliman.gradle.plugin.cobertura.CoberturaPlugin
+
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        //noinspection GroovyAssignabilityCheck
+        classpath "net.saliman:gradle-cobertura-plugin:2.2.8"
+    }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '1.2.4'
+    id 'com.stehno.natives' version '0.3.1'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: CoberturaPlugin
+
+version = '0.0.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.waffel.pokeai.Main'
+
+//Version Variables
+final logBackVersion = '1.1.7'
+final slf4jVersion = '1.7.21'
+final lombokVersion = '1.16.16'
+final powerMockVersion = '1.6.5'
+
+cobertura {
+    coverageIgnoreTrivial = true
+    coverageReportDir = file('target/site/cobertura/')
+    coverageFormats = ['xml','html']
+    coverageExcludes = []
+}
+
+clean.doFirst {
+    delete('target/')
+}
+
+dependencies {
+
+    compile 'org.slick2d:slick2d-core:1.0.2'
+
+    //Configurations
+    compile 'com.beust:jcommander:1.+'
+    compile 'org.aeonbits.owner:owner:1+'
+
+    //Serialization
+    compile 'com.google.code.gson:gson:2.+'
+
+    //Utility libraries
+    compile 'com.google.guava:guava:20.0'
+    compile 'org.apache.commons:commons-lang3:3.6'
+    compile 'commons-io:commons-io:2.5'
+    compile 'org.apache.commons:commons-collections4:4.1'
+    compile 'org.apache.commons:commons-compress:1.12'
+    compile 'org.reflections:reflections:0.9.10'
+    compile "org.projectlombok:lombok:${lombokVersion}"
+
+    // Logging
+    compile "ch.qos.logback:logback-core:${logBackVersion}"
+    compile "ch.qos.logback:logback-classic:${logBackVersion}"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+    compile "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
+    compile 'org.apache.logging.log4j:log4j-api:2.8'
+
+    // Dependency Injection
+    compile "com.google.inject:guice:4.1.0"
+
+    //Testing
+    testCompile 'junit:junit:4.+'
+//    testRuntime "org.slf4j:slf4j-log4j12:1.7.5" // Needed for cobertura
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile "org.powermock:powermock-api-mockito:${powerMockVersion}"
+    testCompile "org.powermock:powermock-module-junit4:${powerMockVersion}"
+
+}
+
+natives {
+    platforms = [com.stehno.gradle.natives.ext.Platform.current()]
+    libraries {
+        exclude = [
+                'lombok/installer/WindowsDriveInfo-x86_64.dll',
+                'lombok/installer/WindowsDriveInfo-i386.dll'
+        ]
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+task ('cleanSetup') {
+    clean.execute()
+    includeNatives.includeNatives()
+}
+compileJava.dependsOn cleanSetup
+classes.mustRunAfter cleanSetup

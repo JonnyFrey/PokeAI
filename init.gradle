@@ -1,0 +1,29 @@
+initscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        //noinspection GroovyAssignabilityCheck
+        classpath "net.saliman:gradle-cobertura-plugin:2.2.8"
+    }
+}
+
+allprojects {
+
+    apply plugin: net.saliman.gradle.plugin.cobertura.CoberturaPlugin
+
+    dependencies {
+        testRuntime "org.slf4j:slf4j-log4j12:1.7.5" // Needed for cobertura
+    }
+
+    cobertura {
+        coverageIgnoreTrivial = true
+        coverageReportDir = file('target/site/cobertura/')
+        coverageFormats = ['xml','html']
+        coverageExcludes = []
+    }
+
+    clean.doFirst {
+        delete('target/')
+    }
+}
