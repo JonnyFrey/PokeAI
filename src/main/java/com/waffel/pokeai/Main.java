@@ -1,8 +1,10 @@
 package com.waffel.pokeai;
 
 import com.beust.jcommander.JCommander;
+import com.google.common.base.Preconditions;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.waffel.pokeai.configuration.Configuration;
 import com.waffel.pokeai.exceptions.PokeAiException;
 import com.waffel.pokeai.exceptions.PokeAiRuntimeException;
@@ -13,7 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
+import static com.google.common.base.Preconditions.*;
 import static com.waffel.pokeai.GameConstants.APP_NAME;
 
 /**
@@ -53,7 +57,9 @@ public final class Main {
         }
 
         final Configuration<?> configuration = command.getConfiguration();
-        final Injector injector = Guice.createInjector(configuration.getRequiredModules());
+        final List<Module> modules = checkNotNull(configuration.getRequiredModules(),
+                String.format("%s command requires a list of modules", commandName));
+        final Injector injector = Guice.createInjector(modules);
         this.execution = injector.getInstance(configuration.getExecution());
     }
 

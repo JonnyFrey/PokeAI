@@ -74,6 +74,9 @@ dependencies {
     // Dependency Injection
     compile "com.google.inject:guice:4.1.0"
 
+    //JDBC
+    compile 'org.xerial:sqlite-jdbc:3.19.3'
+
     //Testing
     testCompile 'junit:junit:4.+'
     testCompile 'org.mockito:mockito-core:1.10.19'
@@ -87,7 +90,9 @@ natives {
     libraries {
         exclude = [
                 'lombok/installer/WindowsDriveInfo-x86_64.dll',
-                'lombok/installer/WindowsDriveInfo-i386.dll'
+                'lombok/installer/WindowsDriveInfo-i386.dll',
+                'org/sqlite/native/Windows/x86_64/sqlitejdbc.dll',
+                'org/sqlite/native/Windows/x86/sqlitejdbc.dll'
         ]
     }
 }

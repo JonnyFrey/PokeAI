@@ -15,6 +15,8 @@ public final class GameConstants {
      */
     public static final String GAME_TITLE = "GAME_TITLE";
 
+    public static final String POKEDEX_PATH = "POKEDEX_PATH";
+
     /**
      * A place holder exception that is used for when code isn't done
      */

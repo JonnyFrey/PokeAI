@@ -2,6 +2,7 @@ package com.waffel.pokeai.execution;
 
 import com.waffel.pokeai.configuration.Configuration;
 import com.waffel.pokeai.configuration.MainConfiguration;
+import com.waffel.pokeai.configuration.PokedexConfiguration;
 import com.waffel.pokeai.configuration.TestConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,12 @@ public enum Command {
     /**
      * Test command that runs and checks to see if slick is appropriately set up
      */
-    TEST("test", new TestConfiguration());
+    TEST("test", new TestConfiguration()),
+
+    /**
+     * See pokedex information
+     */
+    POKEDEX("pokedex", new PokedexConfiguration());
 
     private final String command;
     private final Configuration<? extends Execution> configuration;
