@@ -1,49 +1,55 @@
 package com.waffel.pokeai.games;
 
-import com.google.common.collect.Ordering;
+import com.google.common.collect.Lists;
 import com.waffel.pokeai.dex.PokeDex;
 import com.waffel.pokeai.models.pokemon.Pokemon;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import com.waffel.pokeai.views.PokemonImage;
+import com.waffel.pokeai.views.PokemonView;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
+import org.newdawn.slick.*;
 
+import javax.annotation.Nonnull;
+import javax.inject.Inject;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+
+import static org.newdawn.slick.Input.KEY_EQUALS;
+import static org.newdawn.slick.Input.KEY_MINUS;
 
 /**
  * Created by Jonny on 7/3/2017.
  */
-public class PokedexGame extends BasicGame {
-
-    private final List<Pokemon> pokemonList;
-
-    /**
-     * Create a new basic game
-     *
-     * @param title The title for the game
-     */
-    public PokedexGame(
-            final PokeDex pokeDex,
-            final
-    ) {
-        super("Pokedex");
-        this.pokemonList = this.pokeDex.getAllEntities();
-        Collections.sort(this.pokemonList);
-    }
+public class PokedexGame extends NiftyOverlayGame {
 
     @Override
-    public void init(GameContainer container) throws SlickException {
-        container.setShowFPS(false);
-    }
-
-    @Override
-    public void update(GameContainer container, int delta) throws SlickException {
+    protected void initGameAndGUI(@Nonnull GameContainer container) {
 
     }
 
     @Override
-    public void render(GameContainer container, Graphics g) throws SlickException {
+    protected void renderGame(@Nonnull GameContainer container, @Nonnull Graphics g) {
 
+    }
+
+    @Override
+    protected void updateGame(@Nonnull GameContainer container, int delta) {
+
+    }
+
+    @Override
+    protected void prepareNifty(@Nonnull Nifty nifty) {
+
+    }
+
+    @Override
+    public boolean closeRequested() {
+        return false;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

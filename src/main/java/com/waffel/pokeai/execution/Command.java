@@ -1,9 +1,6 @@
 package com.waffel.pokeai.execution;
 
-import com.waffel.pokeai.configuration.Configuration;
-import com.waffel.pokeai.configuration.MainConfiguration;
-import com.waffel.pokeai.configuration.PokedexConfiguration;
-import com.waffel.pokeai.configuration.TestConfiguration;
+import com.waffel.pokeai.configuration.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -29,7 +26,9 @@ public enum Command {
     /**
      * See pokedex information
      */
-    POKEDEX("pokedex", new PokedexConfiguration());
+    POKEDEX("pokedex", new PokedexConfiguration()),
+
+    NIFTYEXAMPLE("nifty", new NiftyExampleConfiguration());
 
     private final String command;
     private final Configuration<? extends Execution> configuration;

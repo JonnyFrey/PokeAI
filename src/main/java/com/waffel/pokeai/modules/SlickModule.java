@@ -17,9 +17,15 @@ import static com.waffel.pokeai.GameConstants.TEST_GAME_WIDTH;
  * A Module describing how to create a test game
  */
 @AllArgsConstructor
-public final class TestSlickModule extends AbstractModule {
+public final class SlickModule<T extends Game> extends AbstractModule {
 
     private final String gameTitle;
+
+    private final Class<T> gameClass;
+
+    private final int gameWidth;
+
+    private final int gameHeight;
 
     /**
      * {@inheritDoc}
@@ -27,13 +33,14 @@ public final class TestSlickModule extends AbstractModule {
     @Override
     protected void configure() {
         this.bindConstant().annotatedWith(Names.named(GameConstants.GAME_TITLE)).to(gameTitle);
-        this.bind(Game.class).to(TestSlickGame.class).asEagerSingleton();
+        this.bind(Game.class).to(gameClass).asEagerSingleton();
     }
 
     @Provides
     public AppGameContainer providesGameContainer(final Game game) throws SlickException {
         final AppGameContainer container = new AppGameContainer(game);
-        container.setDisplayMode(TEST_GAME_WIDTH, TEST_GAME_HEIGHT, false);
+        container.setDisplayMode(gameWidth, gameHeight, false);
+        container.setShowFPS(false);
         return container;
     }
 

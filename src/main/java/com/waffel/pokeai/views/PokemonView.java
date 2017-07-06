@@ -1,32 +1,39 @@
 package com.waffel.pokeai.views;
 
-import com.waffel.pokeai.models.pokemon.Pokemon;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Graphics;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.waffel.pokeai.exceptions.PokeAiRuntimeException;
 
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.file.Path;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Jonny on 7/3/2017.
  */
 public class PokemonView {
 
-    private final Map<Integer, Animation> pokemonImageMap;
-    private final float x;
-    private final float y;
-    private final Dimension dimension;
+    private LoadingCache<Integer, PokemonImage> imageCache;
 
-    public PokemonView(final float x, final float y, final Dimension dimension) {
-        this.x = x;
-        this.y = y;
-        this.dimension = dimension;
-        this.pokemonImageMap = new HashMap<>();
+    public PokemonView(final Path mainPath) {
+        this.imageCache = CacheBuilder.newBuilder()
+                .maximumSize(800 * 2)
+                .build(
+                        new CacheLoader<Integer, PokemonImage>() {
+                            @Override
+                            public PokemonImage load(final Integer key) throws Exception {
+                                return new PokemonImage(mainPath, key + ".png", 2);
+                            }
+                        }
+                );
     }
 
-    public void drawPokemon(final Graphics g, final Pokemon pokemon) {
-        g.drawAnimation(this.pokemonImageMap.get(pokemon.getId()), this.x, this.y);
+    public PokemonImage getPokemonAnimation(int id) {
+        try {
+            return this.imageCache.get(id);
+        } catch (ExecutionException e) {
+            throw new PokeAiRuntimeException("Failed to get Pokemon Animation", e);
+        }
     }
 
 }

@@ -1,23 +1,20 @@
 package com.waffel.pokeai.configuration;
 
 import com.google.inject.Module;
-import com.waffel.pokeai.execution.MainExecution;
+import com.waffel.pokeai.execution.SlickExecution;
 
 import java.util.List;
 
 import static com.waffel.pokeai.GameConstants.INCOMPLETE_EXCEPTION;
 
-/**
- * Configuration required for the {@link MainExecution}
- */
-public class MainConfiguration implements Configuration<MainExecution> {
+public class MainConfiguration implements Configuration<SlickExecution> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Class<MainExecution> getExecution() {
-        throw INCOMPLETE_EXCEPTION;
+    public Class<SlickExecution> getExecution() {
+        return SlickExecution.class;
     }
 
     /**

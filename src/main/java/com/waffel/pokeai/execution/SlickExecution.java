@@ -9,7 +9,7 @@ import javax.inject.Inject;
 /**
  * An executable to run a test game for verifying slick2D installation.
  */
-public class TestExecution implements Execution {
+public class SlickExecution implements Execution {
 
     /**
      * The container to execute
@@ -22,7 +22,7 @@ public class TestExecution implements Execution {
      * @param container test container to run with
      */
     @Inject
-    public TestExecution(final AppGameContainer container) {
+    public SlickExecution(final AppGameContainer container) {
         this.container = container;
     }
 

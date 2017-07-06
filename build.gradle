@@ -77,6 +77,11 @@ dependencies {
     //JDBC
     compile 'org.xerial:sqlite-jdbc:3.19.3'
 
+    compile group: 'com.github.nifty-gui', name: 'nifty', version: '1.4.2'
+    compile group: 'com.github.nifty-gui', name: 'nifty-slick2d-renderer', version: '1.4.2'
+    compile group: 'com.github.nifty-gui', name: 'nifty-style-black', version: '1.4.2'
+    compile group: 'com.github.nifty-gui', name: 'nifty-examples', version: '1.4.2'
+
     //Testing
     testCompile 'junit:junit:4.+'
     testCompile 'org.mockito:mockito-core:1.10.19'
@@ -92,7 +97,7 @@ natives {
                 'lombok/installer/WindowsDriveInfo-x86_64.dll',
                 'lombok/installer/WindowsDriveInfo-i386.dll',
                 'org/sqlite/native/Windows/x86_64/sqlitejdbc.dll',
-                'org/sqlite/native/Windows/x86/sqlitejdbc.dll'
+                'org/sqlite/native/Windows/x86/sqlitejdbc.dll',
         ]
     }
 }

@@ -2,7 +2,7 @@ package com.waffel.pokeai;
 
 import com.waffel.pokeai.exceptions.PokeAiException;
 import com.waffel.pokeai.execution.Execution;
-import com.waffel.pokeai.execution.TestExecution;
+import com.waffel.pokeai.execution.SlickExecution;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -45,7 +45,7 @@ public class MainTest {
     public void testMainGetAppropriateExecution() throws Exception {
         Main.setupProperties();
         final Main main = new Main("test");
-        assertTrue(main.getExecution() instanceof TestExecution);
+        assertTrue(main.getExecution() instanceof SlickExecution);
     }
 
 }

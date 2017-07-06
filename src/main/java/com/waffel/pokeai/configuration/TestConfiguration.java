@@ -2,16 +2,18 @@ package com.waffel.pokeai.configuration;
 
 import com.beust.jcommander.Parameter;
 import com.google.inject.Module;
-import com.waffel.pokeai.execution.TestExecution;
-import com.waffel.pokeai.modules.TestSlickModule;
+import com.waffel.pokeai.GameConstants;
+import com.waffel.pokeai.execution.SlickExecution;
+import com.waffel.pokeai.games.TestSlickGame;
+import com.waffel.pokeai.modules.SlickModule;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Configuration required for the {@link TestExecution}
+ * Configuration required for the {@link SlickExecution}
  */
-public class TestConfiguration implements Configuration<TestExecution> {
+public class TestConfiguration implements Configuration<SlickExecution> {
 
     /**
      * The parameter to set the title of the application.
@@ -23,8 +25,8 @@ public class TestConfiguration implements Configuration<TestExecution> {
      * {@inheritDoc}
      */
     @Override
-    public Class<TestExecution> getExecution() {
-        return TestExecution.class;
+    public Class<SlickExecution> getExecution() {
+        return SlickExecution.class;
     }
 
     /**
@@ -32,6 +34,12 @@ public class TestConfiguration implements Configuration<TestExecution> {
      */
     @Override
     public List<Module> getRequiredModules() {
-        return Collections.singletonList(new TestSlickModule(this.gameTitle));
+        return Collections.singletonList(
+                new SlickModule<>(
+                        this.gameTitle,
+                        TestSlickGame.class,
+                        GameConstants.TEST_GAME_WIDTH,
+                        GameConstants.TEST_GAME_HEIGHT
+                ));
     }
 }
