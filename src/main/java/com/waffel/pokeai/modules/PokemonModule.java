@@ -28,8 +28,8 @@ public class PokemonModule extends AbstractModule {
                 new SlickModule<>(
                         "Pokedex",
                         PokedexGame.class,
-                        TEST_GAME_WIDTH,
-                        TEST_GAME_HEIGHT
+                        TEST_GAME_WIDTH * 2,
+                        TEST_GAME_HEIGHT * 2
                 )
         );
     }

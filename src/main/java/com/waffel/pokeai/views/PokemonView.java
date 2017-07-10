@@ -18,6 +18,7 @@ public class PokemonView {
     public PokemonView(final Path mainPath) {
         this.imageCache = CacheBuilder.newBuilder()
                 .maximumSize(800 * 2)
+                .softValues()
                 .build(
                         new CacheLoader<Integer, PokemonImage>() {
                             @Override

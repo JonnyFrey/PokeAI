@@ -27,4 +27,9 @@ public class NiftyExampleGame extends NiftyGame {
             nifty.fromXml(niftyExample.getMainXML(), niftyExample.getStartScreen());
         }
     }
+
+    @Override
+    public boolean closeRequested() {
+        return true;
+    }
 }

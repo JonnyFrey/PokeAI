@@ -13,7 +13,7 @@ public class NiftyExampleModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        this.bind(NiftyExample.class).to(ControlsDemo.class);
+        this.bind(NiftyExample.class).to(AllExamples.class);
         this.install(
                 new SlickModule<>(
                         "NiftyExample",

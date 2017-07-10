@@ -1,36 +1,31 @@
 package com.waffel.pokeai.games;
 
-import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.waffel.pokeai.dex.PokeDex;
-import com.waffel.pokeai.models.pokemon.Pokemon;
-import com.waffel.pokeai.views.PokemonImage;
-import com.waffel.pokeai.views.PokemonView;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
-import org.newdawn.slick.*;
+import lombok.AllArgsConstructor;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.List;
-
-import static org.newdawn.slick.Input.KEY_EQUALS;
-import static org.newdawn.slick.Input.KEY_MINUS;
 
 /**
  * Created by Jonny on 7/3/2017.
  */
+@AllArgsConstructor(onConstructor = @__(@Inject))
 public class PokedexGame extends NiftyOverlayGame {
+
+    public final PokeDex pokeDex;
 
     @Override
     protected void initGameAndGUI(@Nonnull GameContainer container) {
-
+        this.initNifty(container);
     }
 
     @Override
     protected void renderGame(@Nonnull GameContainer container, @Nonnull Graphics g) {
-
+        g.clear();
     }
 
     @Override
@@ -40,16 +35,17 @@ public class PokedexGame extends NiftyOverlayGame {
 
     @Override
     protected void prepareNifty(@Nonnull Nifty nifty) {
+        nifty.fromXml("nifty/pokedex.xml", "start");
 
     }
 
     @Override
     public boolean closeRequested() {
-        return false;
+        return true;
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return "Pokedex";
     }
 }
